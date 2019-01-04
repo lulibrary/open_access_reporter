@@ -23,10 +23,11 @@ class TestReporter < Minitest::Test
     }
   end
 
-  def test_doi_formats_classification
+  def test_report
     doi_formats.each do |doi|
       report = reporter.report doi
       refute_empty report
+      assert_equal true, report.keys.include?(:is_oa)
     end
   end
 

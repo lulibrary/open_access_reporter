@@ -11,13 +11,18 @@ module OpenAccessReporter
     end
 
     # @param doi [String] DOI e.g. 10.1234/abc, doi:10.1234/abc, https://doi.org/10.1234/abc
+    # @return [Hash<Symbol>] Verbatim Unpaywall API JSON response
     def report(doi)
       doi = DOI.parse doi
       encoded_doi = encode_doi doi
-      u = unpaywall_entry encoded_doi
-      classification = open_access_classification(u)
-      u.merge!({classification: classification}) if classification
-      u
+      @unpaywall = unpaywall_entry encoded_doi
+    end
+
+    # @param doi [String] DOI e.g. 10.1234/abc, doi:10.1234/abc, https://doi.org/10.1234/abc
+    # @return [String,nil]
+    def classification(doi)
+      report(doi) if @unpaywall.nil?
+      open_access_classification @unpaywall
     end
 
     private

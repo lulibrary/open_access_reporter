@@ -27,9 +27,12 @@ class TestReporter < Minitest::Test
     doi_formats.each do |doi|
       report = reporter.report doi
       refute_empty report
-      assert classifications.include? report[:classification] if report[:classification]
     end
+  end
 
+  def test_classification
+    classification = reporter.classification doi_formats.first
+    assert classifications.include? classification if classification
   end
 
 end

@@ -1,6 +1,6 @@
 # Open Access Reporter
 
-Uses the Unpaywall API (version 2) to gather Open Access information about research outputs with a DOI. Derives
+Uses the Unpaywall API (version 2) to gather Open Access information for research outputs with a DOI. Derives
 a classification (e.g. gold) when possible.
 
 ## Installation

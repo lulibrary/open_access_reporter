@@ -3,7 +3,7 @@ require 'test_helper'
 class TestReporter < Minitest::Test
 
   def reporter
-    OpenAccessReporter::Reporter.new oa_config[:unpaywall_email]
+    OpenAccessReporter::Reporter.new config[:unpaywall_email]
   end
 
   def classifications

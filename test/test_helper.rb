@@ -7,7 +7,7 @@ $LOAD_PATH.unshift(lib)
 
 require 'open_access_reporter'
 
-def oa_config
+def config
   {
     unpaywall_email: ENV['UNPAYWALL_EMAIL']
   }

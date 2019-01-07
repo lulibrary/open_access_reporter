@@ -74,8 +74,8 @@ module OpenAccessReporter
     end
 
     def unpaywall_entry(encoded_doi)
-      u = @http_client.get "https://api.unpaywall.org/v2/#{encoded_doi}?email=#{@email}"
-      JSON.parse u, symbolize_names: true
+      unpaywall_object = @http_client.get "https://api.unpaywall.org/v2/#{encoded_doi}?email=#{@email}"
+      JSON.parse unpaywall_object, symbolize_names: true
     end
 
     def encode_doi(doi)

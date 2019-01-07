@@ -3,6 +3,11 @@
 Uses the Unpaywall API (version 2) to find the salient Open Access data for a research output with a DOI. Derives
 a classification (e.g. gold) when possible.
 
+## Status
+
+[![Gem Version](https://badge.fury.io/rb/open_access_reporter.svg)](https://badge.fury.io/rb/open_access_reporter)
+
+
 ## Installation
 
 Add this line to your application's Gemfile:

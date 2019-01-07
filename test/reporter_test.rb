@@ -25,15 +25,21 @@ class TestReporter < Minitest::Test
 
   def test_report
     doi_formats.each do |doi|
-      report = reporter.report doi
-      refute_empty report
-      assert_equal true, report.keys.include?(:is_oa)
-    end
-  end
+      report = reporter.find doi
 
-  def test_classification
-    classification = reporter.classification doi_formats.first
-    assert classifications.include? classification if classification
+      classification = report.classification
+      refute_empty classification if classification
+      assert_instance_of String, classification if classification
+      assert classifications.include? classification if classification
+
+      assert_equal true, [true, false].include?(report.is_oa)
+
+      refute_empty report.modified_at
+      assert_instance_of String, report.modified_at
+
+      refute_empty report.title
+      assert_instance_of String, report.title
+    end
   end
 
 end

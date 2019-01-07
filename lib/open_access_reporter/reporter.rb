@@ -1,5 +1,6 @@
 require 'http'
 require 'libdoi'
+require_relative 'report'
 
 module OpenAccessReporter
   class Reporter
@@ -11,28 +12,55 @@ module OpenAccessReporter
     end
 
     # @param doi [String] DOI e.g. 10.1234/abc, doi:10.1234/abc, https://doi.org/10.1234/abc
-    # @return [Hash<Symbol>] Verbatim Unpaywall API JSON response
-    def report(doi)
-      doi = DOI.parse doi
-      encoded_doi = encode_doi doi
-      @unpaywall = unpaywall_entry encoded_doi
-    end
+    # @return [OpenAccessReporter::Report, nil]
+    def find(doi)
+      unpaywall = fetch(doi)
+      return nil if unpaywall[:error] === true
 
-    # @param doi [String] DOI e.g. 10.1234/abc, doi:10.1234/abc, https://doi.org/10.1234/abc
-    # @return [String,nil]
-    def classification(doi)
-      report(doi) if @unpaywall.nil?
-      open_access_classification @unpaywall
+      report = OpenAccessReporter::Report.new
+      report.classification = open_access_classification unpaywall
+      report.is_oa = is_oa unpaywall
+      report.license = determine_license unpaywall
+      report.modified_at = modified_at unpaywall
+      report.title = title unpaywall
+      report
     end
 
     private
 
+    # @param doi [String] DOI e.g. 10.1234/abc, doi:10.1234/abc, https://doi.org/10.1234/abc
+    # @return [Hash<Symbol>] Verbatim Unpaywall API JSON response
+    def fetch(doi)
+      doi = DOI.parse doi
+      encoded_doi = encode_doi doi
+      unpaywall_entry encoded_doi
+    end
+
+    def is_oa(unpaywall_object)
+      unpaywall_object[:is_oa]
+    end
+
+    def title(unpaywall_object)
+      unpaywall_object[:title]
+    end
+
+    def modified_at(unpaywall_object)
+      unpaywall_object[:updated]
+    end
+
     def open_access_classification(unpaywall_object)
-      return nil if unpaywall_object[:error] === true
       if unpaywall_object[:is_oa] === true
-        return open_access_colour unpaywall_object
+        open_access_colour unpaywall_object
       else
-        return 'closed'
+        'closed'
+      end
+    end
+
+    def determine_license(unpaywall_object)
+      if unpaywall_object[:is_oa] === true
+        if !unpaywall_object[:best_oa_location].empty?
+          unpaywall_object[:best_oa_location][:license]
+        end
       end
     end
 

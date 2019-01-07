@@ -1,6 +1,6 @@
 # Open Access Reporter
 
-Uses the Unpaywall API (version 2) to gather Open Access information for research outputs with a DOI. Derives
+Uses the Unpaywall API (version 2) to find the salient Open Access data for a research output with a DOI. Derives
 a classification (e.g. gold) when possible.
 
 ## Installation
@@ -25,16 +25,20 @@ email = 'somebody@example.com'
 reporter = OpenAccessReporter::Reporter.new email    
 doi = '10.1098/rstb.2007.0013'
 
-reporter.report doi
-#=> {:best_oa_location=>...}
+report = reporter.find doi
+#=> #<OpenAccessReporter::Report:0x00c0ffee>
  
-reporter.classification doi
+report.classification
 #=> "gold"
+
+report.license
+#=> "cc-by"
+
 ```` 
 
 ### Open access classification
-The Unpaywall API leaves it up to the consumer to determine the Open Access classification (e.g. gold) based on the data it 
-provides.
+The Unpaywall API leaves it up to the consumer to determine the Open Access classification (e.g. gold) based on the data 
+it provides.
 
 This gem uses the following rules:
 

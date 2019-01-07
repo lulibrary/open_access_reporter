@@ -16,7 +16,6 @@ module OpenAccessReporter
     def find(doi)
       unpaywall_object = fetch(doi)
       return nil if unpaywall_object[:error] === true
-
       report = OpenAccessReporter::Report.new
       report.classification = open_access_classification unpaywall_object
       report.is_oa = is_oa unpaywall_object

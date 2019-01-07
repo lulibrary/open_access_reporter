@@ -14,15 +14,15 @@ module OpenAccessReporter
     # @param doi [String] DOI e.g. 10.1234/abc, doi:10.1234/abc, https://doi.org/10.1234/abc
     # @return [OpenAccessReporter::Report, nil]
     def find(doi)
-      unpaywall = fetch(doi)
-      return nil if unpaywall[:error] === true
+      unpaywall_object = fetch(doi)
+      return nil if unpaywall_object[:error] === true
 
       report = OpenAccessReporter::Report.new
-      report.classification = open_access_classification unpaywall
-      report.is_oa = is_oa unpaywall
-      report.license = determine_license unpaywall
-      report.modified_at = modified_at unpaywall
-      report.title = title unpaywall
+      report.classification = open_access_classification unpaywall_object
+      report.is_oa = is_oa unpaywall_object
+      report.license = determine_license unpaywall_object
+      report.modified_at = modified_at unpaywall_object
+      report.title = title unpaywall_object
       report
     end
 

@@ -1,7 +1,7 @@
 module OpenAccessReporter
   class Report
 
-    # @return [String, nil]
+    # @return [String]
     attr_accessor :classification
 
     # @return [Boolean] Is open access

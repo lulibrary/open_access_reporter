@@ -28,9 +28,9 @@ class TestReporter < Minitest::Test
       report = reporter.find doi
 
       classification = report.classification
-      refute_empty classification if classification
-      assert_instance_of String, classification if classification
-      assert classifications.include? classification if classification
+      refute_empty classification
+      assert_instance_of String, classification
+      assert classifications.include? classification
 
       assert_equal true, [true, false].include?(report.is_oa)
 

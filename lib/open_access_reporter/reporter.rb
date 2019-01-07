@@ -27,7 +27,6 @@ module OpenAccessReporter
 
     private
 
-    # @param doi [String] DOI e.g. 10.1234/abc, doi:10.1234/abc, https://doi.org/10.1234/abc
     # @return [Hash<Symbol>] Verbatim Unpaywall API JSON response
     def fetch(doi)
       doi = DOI.parse doi

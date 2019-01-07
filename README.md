@@ -6,7 +6,7 @@ a classification (e.g. gold) when possible.
 ## Status
 
 [![Gem Version](https://badge.fury.io/rb/open_access_reporter.svg)](https://badge.fury.io/rb/open_access_reporter)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/f05eda4aa8b19c3d232c/maintainability)](https://codeclimate.com/github/lulibrary/open_access_reporter/maintainability)
 
 ## Installation
 

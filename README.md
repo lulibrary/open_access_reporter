@@ -1,6 +1,6 @@
 # Open Access Reporter
 
-Finds salient Open Access data and derives a classification for a research output with a DOI.
+Find salient Open Access data and derive a classification for a research output with a DOI.
 
 ## Status
 

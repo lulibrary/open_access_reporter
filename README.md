@@ -27,14 +27,12 @@ Or install it yourself as:
 
 ### Configuration
 ```ruby
-email = 'username@example.com'
-reporter = OpenAccessReporter::Reporter.new email  
+reporter = OpenAccessReporter::Reporter.new 'YOUR_EMAIL'  
 ```
 
 ### Find
 ```ruby
-doi = '10.1234/foo'
-report = reporter.find doi
+report = reporter.find '10.1234/foo'
 #=> #<OpenAccessReporter::Report:0x00c0ffee>
 
 report.open?

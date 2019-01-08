@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = OpenAccessReporter::VERSION
   spec.authors       = ["Adrian Albin-Clark"]
   spec.email         = ["a.albin-clark@lancaster.ac.uk"]
-  spec.summary       = %q{Open Access Reporter.}
+  spec.summary       = %q{Finds salient Open Access data and derives a classification for a research output with a DOI.}
   spec.metadata = {
       'source_code_uri' => 'https://github.com/lulibrary/open_access_reporter'
   }

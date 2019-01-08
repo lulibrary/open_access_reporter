@@ -1,11 +1,8 @@
 module OpenAccessReporter
   class Report
 
-    # @return [String]
+    # @return [String, nil]
     attr_accessor :classification
-
-    # @return [Boolean] Is open access
-    attr_accessor :is_oa
 
     # @return [String, nil]
     attr_accessor :license
@@ -13,8 +10,15 @@ module OpenAccessReporter
     # @return [String] ISO 8601 timestamp
     attr_accessor :modified_at
 
+    attr_writer :open
+
     # @return [String]
     attr_accessor :title
 
+    # @return [Boolean]
+    def open?
+      @open === true ? true : false
     end
+
+  end
 end

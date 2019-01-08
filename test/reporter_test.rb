@@ -7,7 +7,7 @@ class TestReporter < Minitest::Test
   end
 
   def classifications
-    %w{gold green bronze closed}
+    %w{gold green bronze}
   end
 
   def test_initialize
@@ -28,11 +28,10 @@ class TestReporter < Minitest::Test
       report = reporter.find doi
 
       classification = report.classification
-      refute_empty classification
-      assert_instance_of String, classification
-      assert classifications.include? classification
+      assert_instance_of String, classification if classification
+      assert classifications.include? classification if classification
 
-      assert_equal true, [true, false].include?(report.is_oa)
+      assert_equal true, [true, false].include?(report.open?)
 
       refute_empty report.modified_at
       assert_instance_of String, report.modified_at
